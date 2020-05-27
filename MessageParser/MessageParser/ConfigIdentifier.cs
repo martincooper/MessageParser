@@ -5,21 +5,22 @@ using static LanguageExt.Prelude;
 
 namespace MessageParser
 {
+    /// <summary>
+    /// Notes :
+    /// {serviceName} {actionName} {alias} {params}
+    /// </summary>
+    
     public class ConfigIdentifier
     {
         public Try<MessageConfig> IdentifyFromMessage(string message)
         {
             return error("Not Implemented");
         }
+
+        static Try<MessageConfig> error(string error) => 
+            Try<MessageConfig>(new MessageParseException(error));
         
-        Try<MessageConfig> error(string error)
-        {
-            return Try<MessageConfig>(new MessageParseException(error));
-        }
-        
-        Try<MessageConfig> error(string error, Exception exception)
-        {
-            return Try<MessageConfig>(new MessageParseException(error, exception));
-        }
+        static Try<MessageConfig> error(string error, Exception exception) => 
+            Try<MessageConfig>(new MessageParseException(error, exception));
     }
 }
