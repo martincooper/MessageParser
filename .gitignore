@@ -15,8 +15,6 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
-MessageParser/MessageParser/obj/
+**/obj/
+**/bin/
 
-MessageParser/UnitTests/bin/
-
-MessageParser/UnitTests/obj/
