@@ -1,0 +1,9 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/Volumes/OSX Data Drive/Users/Martin/.dotnet/store/|arch|/|tfm|",
+      "/Volumes/OSX Data Drive/Users/Martin/.nuget/packages",
+      "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+    ]
+  }
+}

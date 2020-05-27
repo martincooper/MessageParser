@@ -1,0 +1,12 @@
+/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/UnitTests/bin/Debug/netcoreapp3.1/UnitTests.deps.json
+/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/UnitTests/bin/Debug/netcoreapp3.1/UnitTests.dll
+/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/UnitTests/bin/Debug/netcoreapp3.1/UnitTests.pdb
+/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/UnitTests/bin/Debug/netcoreapp3.1/MessageParser.dll
+/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/UnitTests/bin/Debug/netcoreapp3.1/MessageParser.pdb
+/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/UnitTests/obj/Debug/netcoreapp3.1/UnitTests.csprojAssemblyReference.cache
+/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/UnitTests/obj/Debug/netcoreapp3.1/UnitTests.AssemblyInfoInputs.cache
+/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/UnitTests/obj/Debug/netcoreapp3.1/UnitTests.AssemblyInfo.cs
+/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/UnitTests/obj/Debug/netcoreapp3.1/UnitTests.csproj.CoreCompileInputs.cache
+/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/UnitTests/obj/Debug/netcoreapp3.1/UnitTests.csproj.CopyComplete
+/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/UnitTests/obj/Debug/netcoreapp3.1/UnitTests.dll
+/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/UnitTests/obj/Debug/netcoreapp3.1/UnitTests.pdb
