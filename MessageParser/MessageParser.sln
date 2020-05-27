@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageParser", "MessageParser\MessageParser.csproj", "{A79B783E-4304-42B5-9DA0-B3E5DBD909F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{B6D3DAA6-1143-465B-B627-6F20DC61339F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A79B783E-4304-42B5-9DA0-B3E5DBD909F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A79B783E-4304-42B5-9DA0-B3E5DBD909F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A79B783E-4304-42B5-9DA0-B3E5DBD909F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A79B783E-4304-42B5-9DA0-B3E5DBD909F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D3DAA6-1143-465B-B627-6F20DC61339F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D3DAA6-1143-465B-B627-6F20DC61339F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D3DAA6-1143-465B-B627-6F20DC61339F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D3DAA6-1143-465B-B627-6F20DC61339F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

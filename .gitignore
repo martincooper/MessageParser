@@ -1,15 +1,22 @@
-.idea/
-*.iml
-out/
-gen/
-idea-gitignore.jar
-resources/templates.list
-resources/gitignore/*
-build/
-build.properties
-junit*.properties
-IgnoreLexer.java~
-.gradle
+# Common IntelliJ Platform excludes
+
+# Jetbrains
+**/.idea/**
+
+*.suo
+*.user
+.vs/
+[Bb]in/
+[Oo]bj/
+_UpgradeReport_Files/
+[Pp]ackages/
+
+Thumbs.db
+Desktop.ini
 .DS_Store
 
-/verification
+MessageParser/MessageParser/obj/
+
+MessageParser/UnitTests/bin/
+
+MessageParser/UnitTests/obj/

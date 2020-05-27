@@ -1,9 +1,0 @@
-/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/MessageParser/bin/Debug/netstandard2.1/MessageParser.deps.json
-/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/MessageParser/bin/Debug/netstandard2.1/MessageParser.dll
-/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/MessageParser/bin/Debug/netstandard2.1/MessageParser.pdb
-/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/MessageParser/obj/Debug/netstandard2.1/MessageParser.csprojAssemblyReference.cache
-/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/MessageParser/obj/Debug/netstandard2.1/MessageParser.AssemblyInfoInputs.cache
-/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/MessageParser/obj/Debug/netstandard2.1/MessageParser.AssemblyInfo.cs
-/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/MessageParser/obj/Debug/netstandard2.1/MessageParser.csproj.CoreCompileInputs.cache
-/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/MessageParser/obj/Debug/netstandard2.1/MessageParser.dll
-/Volumes/OSX Data Drive/Users/Martin/Development/MessageParser/MessageParser/MessageParser/obj/Debug/netstandard2.1/MessageParser.pdb
