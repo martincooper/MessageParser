@@ -34,10 +34,11 @@ namespace MessageParser
             if (matchingConfigs.Length == 1)
                 return Try(matchingConfigs.First);
 
-            if (!matchingConfigs.Any())
-                return error($"Unable to find any matching actions for message '{message.Message}'");
-
-            return error($"Found {matchingConfigs.Length} possible actions for message '{message.Message}'. Please clarify");
+            var actionsForMessage = $"actions for message '{message.Message}'.";
+            
+            return !matchingConfigs.Any()
+                ? error($"Unable to find any matching {actionsForMessage}")
+                : error($"Found {matchingConfigs.Length} possible {actionsForMessage} Please clarify.");
         }
 
         /// <summary>
@@ -60,9 +61,9 @@ namespace MessageParser
         static IEnumerable<ActionConfig> matchByName(IEnumerable<ActionConfig> actionConfigs, Queue<MessageToken> tokens)
         {
             return actionConfigs.Pipe(
-                r => matchByProduct(r, tokens),
-                r => matchByActionName(r, tokens),
-                r => matchByAlias(r, tokens));
+                configs => matchByProduct(configs, tokens),
+                configs => matchByActionName(configs, tokens),
+                configs => matchByAlias(configs, tokens));
         }
         
         static IEnumerable<ActionConfig> matchByProduct(IEnumerable<ActionConfig> actionConfigs, Queue<MessageToken> tokens) =>
