@@ -11,7 +11,7 @@ namespace MessageParser
     {
         /// NOTE : Tokenize the message. A token is a Name OR Value only, or BOTH Name and Value.
         /// At this point we don't know what is a name or a value. That will be determined later when
-        /// trying to match the tokens to a Message Config.
+        /// trying to match the tokens to an Action Config.
         ///
         /// A Message Token can be...
         /// 1 : someText                 (single string with no spaces)                  - TokenType.Single
@@ -25,6 +25,9 @@ namespace MessageParser
                 .Map(tokens => new TokenizedMessage(message, tokens.ToArray()));
         }
 
+        /// <summary>
+        /// NOTE : Parsers defined as public to allow ease of Unit Testing each distinct component.
+        /// </summary>
         public static readonly Parser<char> EqualSign = Parse.Char('=');
         public static readonly Parser<char> DoubleQuote = Parse.Char('"');
         public static readonly Parser<char> QuotedText = Parse.AnyChar.Except(DoubleQuote);
@@ -56,9 +59,19 @@ namespace MessageParser
             from value in Word.Or(QuotedString)
             select new MessageToken(name, value);
 
+        /// <summary>
+        /// Parses a Token, either a Single or Double. 
+        /// </summary>
+        public static readonly Parser<MessageToken> MessageToken =
+            from token in NameAndValue.Or(NameOrValue)
+            select token;
+        
+        /// <summary>
+        /// Parses a full message returning a collection of Message Tokens.
+        /// </summary>
         public static readonly Parser<IEnumerable<MessageToken>> ParseFullMessage =
             from sp1 in MaybeSpace
-            from tokens in NameAndValue.Or(NameOrValue).DelimitedBy(Parse.WhiteSpace.AtLeastOnce())
+            from tokens in MessageToken.DelimitedBy(Parse.WhiteSpace.AtLeastOnce())
             from sp2 in MaybeSpace
             select tokens;
     }
