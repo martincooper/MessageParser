@@ -14,8 +14,8 @@ namespace UnitTests
             var aConfig = new ActionConfig("TestProduct", "SomeAction");
             
             var identifier = new ActionConfigIdentifier();
-            var results = identifier.IdentifyFromMessage(new[] { aConfig }, message);
-            Assert.IsTrue(results.IsFail());
+            var results = ActionConfigIdentifier.IdentifyAllFromMessage(new[] { aConfig }, message);
+            Assert.IsTrue(results.Length() == 1);
         }
     }
 }

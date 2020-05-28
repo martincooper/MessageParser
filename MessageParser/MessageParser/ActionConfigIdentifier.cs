@@ -20,20 +20,40 @@ namespace MessageParser
     /// </summary>
     public class ActionConfigIdentifier
     {
-        public Try<ActionConfig> IdentifyFromMessage(ActionConfig[] actionConfigs, TokenizedMessage message)
+        /// <summary>
+        /// Returns a single Action Config which matches the message.
+        /// If matches is not exactly equal to 1, then return an error.
+        /// </summary>
+        /// <param name="actionConfigs">All Action Configs</param>
+        /// <param name="message">The tokenized message</param>
+        /// <returns>Returns a single matching ActionConfig, or an error.</returns>
+        public static Try<ActionConfig> IdentifyFromMessage(ActionConfig[] actionConfigs, TokenizedMessage message)
+        {
+            var matchingConfigs = IdentifyAllFromMessage(actionConfigs, message).ToArray();
+
+            if (matchingConfigs.Length == 1)
+                return Try(matchingConfigs.First);
+
+            if (!matchingConfigs.Any())
+                return error($"Unable to find any matching actions for message '{message.Message}'");
+
+            return error($"Found {matchingConfigs.Length} possible actions for message '{message.Message}'. Please clarify");
+        }
+
+        /// <summary>
+        /// Returns any / all possible Action Configs which match the message.
+        /// </summary>
+        /// <param name="actionConfigs">All Action Configs</param>
+        /// <param name="message">The tokenized message</param>
+        /// <returns>Returns a collection of zero to many possible matches.</returns>
+        public static IEnumerable<ActionConfig> IdentifyAllFromMessage(ActionConfig[] actionConfigs, TokenizedMessage message)
         {
             var tokenQueue = new Queue<MessageToken>(message.Tokens);
             
-            // Need at least one "Single" token to be able to match anything.
-            if (!tokenQueue.Any() || tokenQueue.Peek().TokenType == MessageTokenType.Double)
-                return error($"Couldn't find matching action for message '{message.Message}'.");
-
             // First try matching on a name before matching on parameters.
-            var matchingActionConfigs = matchByName(actionConfigs, tokenQueue).ToArray();
-            
-            return null;
+            return matchByName(actionConfigs, tokenQueue).ToArray();
         }
-
+        
         /// <summary>
         /// Attempts to match and filter by name or names, on Product Name, Action Name and / or Alias. 
         /// </summary>
