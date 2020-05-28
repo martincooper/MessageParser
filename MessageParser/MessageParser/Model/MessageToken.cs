@@ -20,9 +20,16 @@ namespace MessageParser.Model
         }
         
         public string ItemOne { get; }
-        
+
         public string ItemTwo { get; }
         
-        public MessageTokenType TokenType { get; } 
+        public MessageTokenType TokenType { get; }
+
+        public override string ToString()
+        {
+            return TokenType == MessageTokenType.Single
+                ? $"[{ItemOne}]"
+                : $"[{ItemOne}] : [{ItemTwo}]";
+        }
     }
 }

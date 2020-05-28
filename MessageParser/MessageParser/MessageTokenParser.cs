@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using LanguageExt;
+using static LanguageExt.Prelude;
 using MessageParser.Model;
 using Sprache;
 
@@ -18,7 +21,8 @@ namespace MessageParser
         
         public static Try<MessageToken[]> ParseMessage(string message)
         {
-            return null;
+            return Try(() => ParseFullMessage.Parse(message))
+                .Map(tokens => tokens.ToArray());
         }
 
         public static readonly Parser<char> EqualSign = Parse.Char('=');
@@ -26,20 +30,24 @@ namespace MessageParser
         public static readonly Parser<char> QuotedText = Parse.AnyChar.Except(DoubleQuote);
         public static readonly Parser<char> IgnoredChars = Parse.WhiteSpace.Or(DoubleQuote).Or(EqualSign);
         public static readonly Parser<string> Word = Parse.AnyChar.Except(IgnoredChars).AtLeastOnce().Text();
-
         public static readonly Parser<IOption<string>> MaybeSpace = Parse.WhiteSpace.AtLeastOnce().Text().Optional();
-        
         
         public static readonly Parser<string> QuotedString =
             from open in DoubleQuote
             from text in QuotedText.AtLeastOnce().Text()
             from close in DoubleQuote
-            select text;        
+            select text;
         
+        /// <summary>
+        /// Parses a single text item, a single word or quoted text. 
+        /// </summary>
         public static readonly Parser<MessageToken> NameOrValue =
             from nameOrValue in Word.Or(QuotedString)
             select new MessageToken(nameOrValue);
         
+        /// <summary>
+        /// Parses a name with a value.
+        /// </summary>
         public static readonly Parser<MessageToken> NameAndValue =
             from name in Word
             from sp1 in MaybeSpace
@@ -47,5 +55,11 @@ namespace MessageParser
             from sp2 in MaybeSpace
             from value in Word.Or(QuotedString)
             select new MessageToken(name, value);
+
+        public static readonly Parser<IEnumerable<MessageToken>> ParseFullMessage =
+            from sp1 in MaybeSpace
+            from tokens in NameAndValue.Or(NameOrValue).DelimitedBy(Parse.WhiteSpace.AtLeastOnce())
+            from sp2 in MaybeSpace
+            select tokens;
     }
 }
