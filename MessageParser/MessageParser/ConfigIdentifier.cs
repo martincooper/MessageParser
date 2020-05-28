@@ -5,9 +5,14 @@ using static LanguageExt.Prelude;
 
 namespace MessageParser
 {
+    
+
+    
     /// <summary>
-    /// Notes :
     /// {serviceName} {actionName} {alias} {params}
+    /// 1 : Get first param
+    /// 2 : Match on Service Name -> Action Name -> Alias
+    /// 
     /// </summary>
     
     public class ConfigIdentifier
