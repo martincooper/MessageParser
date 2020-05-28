@@ -19,28 +19,37 @@ namespace MessageParser
     {
         public Try<ActionConfig> IdentifyFromMessage(ActionConfig[] actionConfigs, TokenizedMessage message)
         {
-            var tokens = message.Tokens;
+            var tokenQueue = new Queue<MessageToken>(message.Tokens);
             
             // Need at least one "Single" token to be able to match anything.
-            if (!tokens.Any() || tokens[0].TokenType == MessageTokenType.Double)
+            if (!tokenQueue.Any() || tokenQueue.Peek().TokenType == MessageTokenType.Double)
                 return error($"Couldn't find matching action for message '{message.Message}'.");
 
             // First see if the first token matches Product Name...
-            var products = matchByProduct(actionConfigs, tokens[0].ItemOne);
+            var products = matchByProduct(actionConfigs, tokenQueue);
 
             if (!products.Any())
             {
-                var names = matchByActionName(actionConfigs, tokens[0].ItemOne);
+                var names = matchByActionName(actionConfigs, tokenQueue);
 
                 if (!names.Any())
                 {
-                    var aliases = matchByAlias(actionConfigs, tokens[0].ItemOne);
+                    var aliases = matchByAlias(actionConfigs, tokenQueue);
                 }
             }
 
             return null;
         }
 
+        static IEnumerable<ActionConfig> matchByProduct(ActionConfig[] actionConfigs, Queue<MessageToken> tokens) =>
+            findMatch(actionConfigs, tokens, matchByProduct);
+
+        static IEnumerable<ActionConfig> matchByActionName(ActionConfig[] actionConfigs, Queue<MessageToken> tokens) =>
+            findMatch(actionConfigs, tokens, matchByActionName);
+        
+        static IEnumerable<ActionConfig> matchByAlias(ActionConfig[] actionConfigs, Queue<MessageToken> tokens) =>
+            findMatch(actionConfigs, tokens, matchByAlias);
+        
         // Gets all Action Configs which match by product name.
         static IEnumerable<ActionConfig> matchByProduct(ActionConfig[] actionConfigs, string value) =>
             actionConfigs.Where(ac => isMatch(ac.Product, value));
@@ -52,6 +61,26 @@ namespace MessageParser
         // Gets all Action Configs which match by any specified alias.
         static IEnumerable<ActionConfig> matchByAlias(ActionConfig[] actionConfigs, string value) =>
             actionConfigs.Where(ac => isMatch(ac.Aliases, value));
+        
+        static IEnumerable<ActionConfig> findMatch(
+            ActionConfig[] actionConfigs, 
+            Queue<MessageToken> tokens,
+            Func<ActionConfig[], string, IEnumerable<ActionConfig>> actionFilter)
+        {
+            // If no tokens left in the queue, return original collection of action configs.
+            if (!tokens.Any()) return actionConfigs;
+            
+            // If the Token Type is Double (name / value pair), return original collection of action configs.
+            if (tokens.Peek().TokenType == MessageTokenType.Double) return actionConfigs;
+            
+            var configs = actionFilter(actionConfigs, tokens.Peek().ItemOne).ToArray();
+
+            // If no matches, return full set and don't pop current token from the queue.
+            if (!configs.Any()) return actionConfigs;
+
+            tokens.Dequeue();
+            return configs;
+        }
         
         static bool isMatch(string one, string two) => 
             string.Equals(one, two, StringComparison.OrdinalIgnoreCase);
