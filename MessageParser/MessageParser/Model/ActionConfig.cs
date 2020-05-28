@@ -1,11 +1,11 @@
 namespace MessageParser.Model
 {
-    public class MessageConfig
+    public class ActionConfig
     {
-        public MessageConfig()
+        public ActionConfig()
         { }
 
-        public MessageConfig(string product, string name)
+        public ActionConfig(string product, string name)
         {
             Product = product;
             Name = name;

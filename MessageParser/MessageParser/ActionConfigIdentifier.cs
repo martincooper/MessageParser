@@ -5,9 +5,6 @@ using static LanguageExt.Prelude;
 
 namespace MessageParser
 {
-    
-
-    
     /// <summary>
     /// {serviceName} {actionName} {alias} {params}
     /// 1 : Get first param
@@ -15,17 +12,17 @@ namespace MessageParser
     /// 
     /// </summary>
     
-    public class ConfigIdentifier
+    public class ActionConfigIdentifier
     {
-        public Try<MessageConfig> IdentifyFromMessage(string message)
+        public Try<ActionConfig> IdentifyFromMessage(string message)
         {
             return error("Not Implemented");
         }
 
-        static Try<MessageConfig> error(string error) => 
-            Try<MessageConfig>(new MessageParseException(error));
+        static Try<ActionConfig> error(string error) => 
+            Try<ActionConfig>(new MessageParseException(error));
         
-        static Try<MessageConfig> error(string error, Exception exception) => 
-            Try<MessageConfig>(new MessageParseException(error, exception));
+        static Try<ActionConfig> error(string error, Exception exception) => 
+            Try<ActionConfig>(new MessageParseException(error, exception));
     }
 }

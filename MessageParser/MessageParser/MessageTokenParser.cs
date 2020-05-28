@@ -19,10 +19,10 @@ namespace MessageParser
         /// 3 : value = something        (string = string) or (string=string)            - TokenType.Double
         /// 4 : value = "some text"      (string = "quoted string with maybe spaces")    - TokenType.Double
         
-        public static Try<MessageToken[]> ParseMessage(string message)
+        public static Try<TokenizedMessage> ParseMessage(string message)
         {
             return Try(() => ParseFullMessage.Parse(message))
-                .Map(tokens => tokens.ToArray());
+                .Map(tokens => new TokenizedMessage(message, tokens.ToArray()));
         }
 
         public static readonly Parser<char> EqualSign = Parse.Char('=');
