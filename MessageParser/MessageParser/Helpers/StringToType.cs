@@ -4,9 +4,9 @@ using static LanguageExt.Prelude;
 
 namespace MessageParser.Helpers
 {
-    public class StringToType
+    public static class StringToType
     {
-        public bool MatchesType(Type type, string value)
+        public static bool ConvertsToType(Type type, string value)
         {
             if (type == typeof(int)) return IsInt(value).IsSome;
             if (type == typeof(long)) return IsLong(value).IsSome;

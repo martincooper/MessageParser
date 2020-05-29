@@ -2,12 +2,12 @@
 
 namespace MessageParser.Model
 {
-    public class MessageParameter
+    public class ActionParameter
     {
-        public MessageParameter() 
+        public ActionParameter() 
         { }
 
-        public MessageParameter(string name, Type type)
+        public ActionParameter(string name, Type type)
         {
             Name = name;
             Type = type;

@@ -20,6 +20,6 @@ namespace MessageParser.Model
         
         public string[] Aliases { get; set; } = { };
 
-        public MessageParameter[] Parameters { get; set; } = { };
+        public ActionParameter[] Parameters { get; set; } = { };
     }
 }
