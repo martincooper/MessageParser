@@ -7,9 +7,9 @@ using NUnit.Framework;
 namespace UnitTests
 {
     [TestFixture]
-    public class MessageParserTests
+    public class ActionConfigIdentifierTestsWithNamesOnly
     {
-        private ActionConfig[] getTestActionConfigs()
+        private ActionConfig[] getTestActionConfigsWithNamesOnly()
         {
             return new[]
             {
@@ -26,7 +26,7 @@ namespace UnitTests
         [Test]
         public void GetActionByUniqueAlias()
         {
-            var actionConfigs = getTestActionConfigs();
+            var actionConfigs = getTestActionConfigsWithNamesOnly();
             var message = MessageTokenParser.ParseMessage("SomeAliasThree").GetValue();
             var results = ActionConfigIdentifier.IdentifyAllFromMessage(actionConfigs, message).ToArray();
             
@@ -39,7 +39,7 @@ namespace UnitTests
         [Test]
         public void GetDuplicateActionsByName()
         {
-            var actionConfigs = getTestActionConfigs();
+            var actionConfigs = getTestActionConfigsWithNamesOnly();
             var message = MessageTokenParser.ParseMessage("SomeActionTwo").GetValue();
             var results = ActionConfigIdentifier.IdentifyAllFromMessage(actionConfigs, message).ToArray();
             
@@ -56,7 +56,7 @@ namespace UnitTests
         [Test]
         public void GetActionByUniqueProductAndName()
         {
-            var actionConfigs = getTestActionConfigs();
+            var actionConfigs = getTestActionConfigsWithNamesOnly();
             var message = MessageTokenParser.ParseMessage(" product_two  someactionthree ").GetValue();
             var results = ActionConfigIdentifier.IdentifyAllFromMessage(actionConfigs, message).ToArray();
             
