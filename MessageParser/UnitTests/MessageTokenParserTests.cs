@@ -74,7 +74,7 @@ namespace UnitTests
         [Test]
         public void FullMessageComplex()
         {
-            var msg = "  serviceName actionName  param1=50 param2 = 500  param3 = \" some text \"  \"final text\"  ";
+            var msg = " @BoT  serviceName actionName  param1=50 param2 = 500  param3 = \" some text \"  \"final text\"  ";
             var result = MessageTokenParser.ParseFullMessage.Parse(msg).ToArray();
 
             Assert.AreEqual(result.Length, 6);

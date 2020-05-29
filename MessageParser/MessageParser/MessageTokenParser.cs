@@ -19,6 +19,8 @@ namespace MessageParser
         /// 3 : value = something        (string = string) or (string=string)            - TokenType.Double
         /// 4 : value = "some text"      (string = "quoted string with maybe spaces")    - TokenType.Double
         
+        private const string BotName = "@BOT";
+        
         public static Try<TokenizedMessage> ParseMessage(string message)
         {
             return Try(() => ParseFullMessage.Parse(message))
@@ -28,12 +30,19 @@ namespace MessageParser
         /// <summary>
         /// NOTE : Parsers defined as public to allow ease of Unit Testing each distinct component.
         /// </summary>
+        //public static readonly Parser<string> BotMention = Parse.String(BotName);
         public static readonly Parser<char> EqualSign = Parse.Char('=');
         public static readonly Parser<char> DoubleQuote = Parse.Char('"');
         public static readonly Parser<char> QuotedText = Parse.AnyChar.Except(DoubleQuote);
         public static readonly Parser<char> IgnoredChars = Parse.WhiteSpace.Or(DoubleQuote).Or(EqualSign);
         public static readonly Parser<string> Word = Parse.AnyChar.Except(IgnoredChars).AtLeastOnce().Text();
         public static readonly Parser<IOption<string>> MaybeSpace = Parse.WhiteSpace.AtLeastOnce().Text().Optional();
+        
+        public static readonly Parser<string> BotMention =
+            from sp1 in MaybeSpace
+            from name in Parse.IgnoreCase(BotName).Text()
+            from sp2 in MaybeSpace
+            select name;
         
         public static readonly Parser<string> QuotedString =
             from open in DoubleQuote
@@ -71,6 +80,7 @@ namespace MessageParser
         /// </summary>
         public static readonly Parser<IEnumerable<MessageToken>> ParseFullMessage =
             from sp1 in MaybeSpace
+            from botName in BotMention.Optional()
             from tokens in MessageToken.DelimitedBy(Parse.WhiteSpace.AtLeastOnce())
             from sp2 in MaybeSpace
             select tokens;
